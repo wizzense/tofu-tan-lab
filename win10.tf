@@ -1,33 +1,23 @@
 ###############################################################################
-# We assume you already have a hyperv_network_switch resource named "Lan"
-# declared elsewhere, like:
-#
-# resource "hyperv_network_switch" "Lan" {
-#   name = "Lan"
-# }
-#
-###############################################################################
-
-###############################################################################
 # hyperv_vhd: Create multiple VHD objects (one per VM) with distinct paths
 ###############################################################################
-resource "hyperv_vhd" "control_node_vhd" {
-  count = var.number_of_vms
+resource "hyperv_vhd" "win10_vhd" {
+  count = var.windows_10_vm_count
 
-  depends_on = [hyperv_network_switch.Lan]
+  depends_on = [hyperv_network_switch.wan]
 
   # Unique path for each VHD (e.g. ...-0.vhdx, ...-1.vhdx, etc.)
-  path = "B:\\hyper-v\\PrimaryControlNode\\PrimaryControlNode-Server2025-${count.index}.vhdx"
+  path = "${var.hyperv_vm_path}-Win10-${count.index}.vhdx"
   size = 60737421312
 }
 
 ###############################################################################
 # hyperv_machine_instance: Create multiple VMs
 ###############################################################################
-resource "hyperv_machine_instance" "control_node_vm" {
+resource "hyperv_machine_instance" "win10_vm" {
   count = var.number_of_vms
 
-  name                                    = "PrimaryControlNode-Server2025-${count.index}"
+  name                                    = "Win10-${count.index}"
   generation                              = 2
   memory_startup_bytes                    = 2147483648 # 2 GB
   memory_maximum_bytes                    = 4294967296 # 4 GB
@@ -83,7 +73,7 @@ resource "hyperv_machine_instance" "control_node_vm" {
 
   network_adaptors {
     name                = "wan"
-    switch_name         = hyperv_network_switch.Lan.name
+    switch_name         = hyperv_network_switch.wan.name
     management_os       = false
     is_legacy           = false
     dynamic_mac_address = true
@@ -92,14 +82,14 @@ resource "hyperv_machine_instance" "control_node_vm" {
   dvd_drives {
     controller_number   = "0"
     controller_location = "1"
-    path                = var.iso_path
+    path                = var.win_10_iso_path
   }
 
   hard_disk_drives {
     controller_type                 = "Scsi"
     controller_number               = 0
     controller_location             = 0
-    path                            = hyperv_vhd.control_node_vhd[count.index].path
+    path                            = hyperv_vhd.win10_vhd[count.index].path
     disk_number                     = 4294967295
     support_persistent_reservations = false
     maximum_iops                    = 0
