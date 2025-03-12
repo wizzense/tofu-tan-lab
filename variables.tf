@@ -44,7 +44,7 @@ variable "win_11_iso_path" {
 
 variable "rocky_94_iso_path" {
     type  = string
-    default = "\\B:\share\isos\Rocky-9.4-x86_64-dvd.iso"
+    default = "\\B:\\share\\isos\\Rocky-9.4-x86_64-dvd.iso"
 }
 
 
@@ -73,11 +73,6 @@ variable "rocky_94_vm_count" {
 }
 
 variable "windows_10_vm_count" {
-  type    = number
-  default = 1
-}
-
-variable "windows_11_vm_count" {
   type    = number
   default = 1
 }
