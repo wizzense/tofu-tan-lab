@@ -15,7 +15,7 @@ resource "hyperv_vhd" "win10_vhd" {
 # hyperv_machine_instance: Create multiple VMs
 ###############################################################################
 resource "hyperv_machine_instance" "win10_vm" {
-  count = var.number_of_vms
+  count = var.windows_10_vm_count
 
   name                                    = "Win10-${count.index}"
   generation                              = 2

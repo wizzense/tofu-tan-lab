@@ -15,7 +15,7 @@ resource "hyperv_vhd" "server2025_vhd" {
 # hyperv_machine_instance: Create multiple VMs
 ###############################################################################
 resource "hyperv_machine_instance" "server_core_2025_vm" {
-  count = var.number_of_vms
+  count = var.windows_server_core_vm_count
 
   name                                    = "Server-Core-2025-${count.index}"
   generation                              = 2

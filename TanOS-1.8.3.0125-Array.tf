@@ -15,7 +15,7 @@ resource "hyperv_vhd" "tanos_vhd" {
 # hyperv_machine_instance: Create multiple VMs
 ###############################################################################
 resource "hyperv_machine_instance" "tanos_vm" {
-  count = var.number_of_vms
+  count = var.tanos_vm_count
 
   name                                    = "TanOS-${count.index}"
   generation                              = 2

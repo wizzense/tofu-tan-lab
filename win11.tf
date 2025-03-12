@@ -15,7 +15,7 @@ resource "hyperv_vhd" "win11_vhd" {
 # hyperv_machine_instance: Create multiple VMs
 ###############################################################################
 resource "hyperv_machine_instance" "win11_vm" {
-  count = var.number_of_vms
+  count = var.windows_11_vm_count
 
   name                                    = "win11-${count.index}"
   generation                              = 2

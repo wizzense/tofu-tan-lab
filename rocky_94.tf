@@ -2,7 +2,7 @@
 # hyperv_vhd: Create multiple VHD objects (one per VM) with distinct paths
 ###############################################################################
 resource "hyperv_vhd" "rocky94_vhd" {
-  count = var.number_of_vms
+  count = var.rocky_94_vm_count
 
   depends_on = [hyperv_network_switch.wan]
 
