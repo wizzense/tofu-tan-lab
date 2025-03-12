@@ -19,7 +19,7 @@ variable "hyperv_password" {
 
 variable "hyperv_vm_path" {
   type = string
-  default = B:\\hyper-v\\
+  default = "B:\\hyper-v\\"
 }
 
 variable "server_2025_iso_path" {
@@ -80,9 +80,4 @@ variable "windows_10_vm_count" {
 variable "windows_11_vm_count" {
   type    = number
   default = 1
-}
-
-variable "rocky_94_vm_count" {
-  type    = number
-  default = 2
 }

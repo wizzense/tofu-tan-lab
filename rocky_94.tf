@@ -14,7 +14,7 @@ resource "hyperv_vhd" "rocky94_vhd" {
 ###############################################################################
 # hyperv_machine_instance: Create multiple VMs
 ###############################################################################
-resource "hyperv_machine_instance" "server_core_2025_vm" {
+resource "hyperv_machine_instance" "rocky94_vm" {
   count = var.number_of_vms
 
   name                                    = "rocky94-${count.index}"
